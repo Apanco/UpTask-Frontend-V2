@@ -3,7 +3,6 @@ import { validateToken } from "@/api/AuthAPI"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot,} from "@/components/ui/input-otp"
 import { ConfirmToken } from "@/types"
 import { useMutation } from "@tanstack/react-query"
-import { useState } from "react"
 import { toast } from "react-toastify"
 
 type NewPasswordTokenProps = {
@@ -14,8 +13,6 @@ type NewPasswordTokenProps = {
 
 export default function NewPasswordToken({token, setToken, setIsValidToken} : NewPasswordTokenProps) {
 
-  const [load, setLoad] = useState(false)
-
   const handleChange = (token : ConfirmToken['token'])=>{
     setToken(token)
   }
@@ -23,7 +20,6 @@ export default function NewPasswordToken({token, setToken, setIsValidToken} : Ne
     mutationFn:validateToken,
     onError:(error)=>{
       toast.error(error.message)
-      setLoad(false)
     },
     onSuccess:(data)=>{
       toast.success(data)
@@ -31,9 +27,7 @@ export default function NewPasswordToken({token, setToken, setIsValidToken} : Ne
     }
   })
   const handleComplete = async ()=>{
-    setLoad(true)
     await mutateAsync({token})
-    setLoad(false)
   }
 
   return (

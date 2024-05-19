@@ -1,10 +1,10 @@
-import { Task } from "@/types"
-import { obtenerEstiloPorcentaje, redondear, setPorcentaje } from "@/utils/utils"
+import { TaskStaus } from "@/types"
+import { obtenerEstiloPorcentaje, setPorcentaje } from "@/utils/utils"
 import * as Progress from '@radix-ui/react-progress';
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 type ProjectProgressBarProps = {
-    tasks: Task[]
+    tasks: TaskStaus[]
 }
 export default function ProjectProgressBar({tasks} : ProjectProgressBarProps) {
     

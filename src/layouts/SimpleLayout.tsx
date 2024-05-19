@@ -1,8 +1,6 @@
 import C_Logo from "@/components/C_Logo";
 import { Outlet, useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import { Button } from "@/components/ui/button";
-import Plus from "@/components/icons/Plus";
 import HomeIcon from "@/components/icons/HomeIcon";
 export default function SimpleLayout() {
     const navigate = useNavigate()

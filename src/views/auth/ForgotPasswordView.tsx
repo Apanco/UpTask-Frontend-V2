@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ForgotPasswordForm } from "../../types";
-import ErrorMessage from "@/components/ErrorMessage";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { C_Boton } from "@/components/C_Boton";

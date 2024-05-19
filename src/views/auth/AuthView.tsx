@@ -1,5 +1,4 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
 export default function AuthView() {
     return (
         <div className=" h-screen w-full lg:grid lg:min-h-[600px] lg:grid-cols-2">

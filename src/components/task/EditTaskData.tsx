@@ -61,8 +61,11 @@ export default function EditTaskData() {
         name: "",
         description: "",
         project: "",
-        status: "pending"
-    }
+        status: "pending",
+        completedBy:[],
+        createdAt: "",
+        updatedAt: "",
+    } 
     if(isDesktop){
         return( 
             <Dialog open={isOpen} onOpenChange={handleModal}>
