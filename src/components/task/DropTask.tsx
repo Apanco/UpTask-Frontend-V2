@@ -1,4 +1,5 @@
 import { useDroppable } from "@dnd-kit/core"
+import { useMediaQuery } from "usehooks-ts"
 
 type DropTaskProps = {
     status: string
@@ -23,12 +24,18 @@ export default function DropTask({status} : DropTaskProps) {
     const { isOver, setNodeRef } = useDroppable({
         id:status
     })
-
+    const isDesktop = useMediaQuery("(min-width: 768px)")
     const styles = isOver ? `${statusStylesText[status]} ${statusStyles[status]}` : "border-muted-foreground"
-
-    return (
-        <div ref={setNodeRef} className={` text-xs text-center text-muted-foreground font-semibold p-2 border border-dashed  mt-5 ${styles}`}>
-            Soltar tarea aqui
-        </div>
-    )
+    if(isDesktop){
+        return (
+            <div ref={setNodeRef} className={` text-xs text-center text-muted-foreground font-semibold p-2 border border-dashed  mt-5 ${styles}`}>
+                Soltar tarea aqui
+            </div>
+        )
+    }else{
+        return (
+            <>
+            </>
+        )
+    }
 }

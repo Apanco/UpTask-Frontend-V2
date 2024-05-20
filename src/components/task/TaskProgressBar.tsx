@@ -13,12 +13,12 @@ export default function TaskProgressBar({tasks} : TaskProgressBarProps) {
     const color = obtenerEstiloPorcentaje(projectCompletionPercentage)
     const textColor = `text${color}`;
     return (
-      <div className=" w-full flex">
-          <div className=" w-1/3 flex items-center">
-            <h1>Progreso: <span className={`font-bold ${textColor} transition-transform`}>{" "+redondear(projectCompletionPercentage,1)} %</span></h1>
+      <div className=" w-full flex justify-center items-center gap-x-5">
+          <div className=" w-1/5 flex justify-center items-center">
+            <h1><span className={`font-bold ${textColor} transition-transform`}>{" "+redondear(projectCompletionPercentage,1)} %</span></h1>
           </div>
 
-        <div className=" w-2/3">
+        <div className=" w-4/5">
           <div className=" h-10 flex flex-col items-center justify-center">
               <Progress.Root className=" relative overflow-hidden bg-fondoP rounded-full w-full z-0 h-6" value={projectCompletionPercentage}>
                 <Progress.Indicator
