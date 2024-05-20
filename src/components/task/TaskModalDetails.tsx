@@ -1,7 +1,7 @@
 //# ->  Components
 import { getTaskById, updateStatus } from "@/api/TaskApi";
 import {Dialog,DialogContent,DialogDescription,DialogHeader,DialogTitle,} from "@/components/ui/dialog"
-import {Drawer,DrawerContent,DrawerDescription,DrawerHeader,DrawerTitle,DrawerOverlay} from "@/components/ui/drawer"
+import {Drawer,DrawerContent,DrawerDescription,DrawerHeader,DrawerTitle} from "@/components/ui/drawer"
 import {Select,SelectContent,SelectGroup,SelectItem,SelectTrigger,SelectValue} from "@/components/ui/select"
 import {Accordion,AccordionContent,AccordionItem,AccordionTrigger} from "@/components/ui/accordion"
 import {ResizableHandle,ResizablePanel,ResizablePanelGroup,} from "@/components/ui/resizable"
@@ -181,8 +181,7 @@ export default function TaskModalDetails() {
     }
     //# ---------------------------------------------------------------------------------------------->
     return (
-        <Drawer open={existTaskId}>
-            <DrawerOverlay className=" z-50 bg-transparent" onClick={handleClose}/>
+        <Drawer open={existTaskId} onClose={handleClose}>
             <DrawerContent className=" mb-10">
                 {isLoading ? (
                     <div className=" w-full p-5">
@@ -219,6 +218,7 @@ export default function TaskModalDetails() {
                                     Estado:
                                 </label>
                                 <Select 
+                                    
                                     defaultValue={data?.status}
                                     onValueChange={handleChange}    
                                     disabled={load}
