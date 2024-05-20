@@ -19,6 +19,7 @@ import { Loader2 } from "lucide-react";
 import { Task } from "@/types";
 import { useState } from "react";
 import NotesPanel from "../notes/NotesPanel";
+import { Skeleton } from "../ui/skeleton";
 
 //# ->  Types
 
@@ -181,12 +182,13 @@ export default function TaskModalDetails() {
     //# ---------------------------------------------------------------------------------------------->
     return (
         <Drawer open={existTaskId}>
-            <DrawerOverlay className="z-50 bg-transparent" onClick={handleClose}/>
+            <DrawerOverlay className=" z-50 bg-transparent" onClick={handleClose}/>
             <DrawerContent className=" mb-10">
                 {isLoading ? (
-                    <>
-                        Esta cargando
-                    </>
+                    <div className=" w-full p-5">
+                        <Skeleton className=" w-3/4 h-10"/>
+                        <Skeleton className=" mt-5 w-full h-14"/>
+                    </div>
                 ) : (
                     <>
                         <DrawerHeader className="text-left">
@@ -221,7 +223,7 @@ export default function TaskModalDetails() {
                                     onValueChange={handleChange}    
                                     disabled={load}
                                 >
-                                    <SelectTrigger className="w-[180px]">
+                                    <SelectTrigger className="w-[180px] z-50">
                                         <SelectValue placeholder="Seleccione el estado" />
                                     </SelectTrigger>
                                     <SelectContent className="">
