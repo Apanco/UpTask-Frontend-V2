@@ -1,15 +1,16 @@
 
 //# ->  Dependencies
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useQuery    } from "@tanstack/react-query"
 import { getProjectById } from "@/api/ProjectApi";
 import { Link } from "react-router-dom";
 //# ->  Components
-import ArrowLeftBack from "@/components/icons/ArrowLeftBack";
 import C_isLoading from "@/components/C_isLoading";
 import C_RecizableSimple from "@/components/C_RecizableSimple";
 import UpdateProjectForm from "@/components/projects/UpdateProjectForm";
 import C_Encabezado from "@/components/C_Encabezado";
+import { Button } from "@/components/ui/button";
+import { ArrowLeftCircle } from "lucide-react";
 export default function EditProjectView() {
     const params = useParams()
     const projectId = params.projectId!
@@ -19,20 +20,23 @@ export default function EditProjectView() {
         queryFn: ()=> getProjectById(projectId),
         retry:2
     })
+    const navigate = useNavigate()
     return (
         <>
             <C_Encabezado
                 title="Editar proyecto"
                 description="Edite los campos del formulario para editar el proyecto"
             >
-                <Link to={"/"}
-                    className=" py-2 px-4 border-2 border-secundario text-secundario rounded flex hover:bg-secundarioF hover:text-white"
-                >   
-                    <div className=" flex flex-row gap-x-3 mx-auto">
-                        <ArrowLeftBack width={2}/>
-                        Volver a proyectos  
+                <Button
+                    variant={"secondary"}
+                    className="  w-auto px-5 border border-primary hover:text-primary"
+                    onClick={()=>navigate("/")}
+                >
+                    <div className=" w-full flex justify-center items-center gap-x-3">
+                        <ArrowLeftCircle className=" w-6 h-6"/>
+                        <p>Volver a proyectos   </p>
                     </div>
-                </Link>
+                </Button>
 
             </C_Encabezado>
         

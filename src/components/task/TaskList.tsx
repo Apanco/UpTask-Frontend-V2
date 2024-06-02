@@ -10,6 +10,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { updateStatus } from '@/api/TaskApi'
 import { toast } from 'react-toastify'
 import { useParams } from 'react-router-dom'
+import { useMediaQuery } from 'usehooks-ts'
+import { Card } from '../ui/card'
 
 
 type GroupTask ={
@@ -37,6 +39,9 @@ type TaskListProps = {
 }
 //# ->  Componente
 export default function TaskList({tasks, canEdit} : TaskListProps) {
+    //. ->  Mediaquery
+    const isDesktop = useMediaQuery("(min-width: 768px)");
+
     const groupedTasks = tasks.reduce((acc, task) => {
         let currentGroup = acc[task.status] ? [...acc[task.status]] : [];
         currentGroup = [...currentGroup, task]
@@ -85,38 +90,70 @@ export default function TaskList({tasks, canEdit} : TaskListProps) {
             })
         }
     }
-
-    return (
+    //# ->  Desktop
+    if(isDesktop){
+        return (
+                <>
+                <h2 className="text-5xl font-black my-10">Tareas</h2>
+                
+                <ScrollArea className=' w-full whitespace-nowrap rounded-md border'>
+                    <ScrollBar orientation="horizontal" />
+    
+                    <div className='flex gap-3 pb-32 max-w-[980px] w-full px-0 mx-auto'>
+                        <DndContext onDragEnd={handleDragEnd}>
+                            {Object.entries(groupedTasks).map(([status, tasks]) => (
+                                <div key={status} className=' w-1/5'>
+                                    <h3 className={` text-center text-white text-base font-normal border border-borde bg-input px-3 py-1 border-t-8 ${statusStyles[status]}`}>{statusTranslations[status]}</h3>
+                                    <DropTask status={status}/>
+                                    
+                                    <ul className='mt-5 space-y-5'>
+                                        {tasks.length === 0 ? (
+                                            <li className=" text-muted-foreground text-center font-semibold pt-3">No Hay tareas</li>
+                                        ) : (
+                                            tasks.map(task => <TaskCard key={task._id} task={task} canEdit={canEdit}/>)
+                                        )}
+                                    </ul>
+                                </div>
+                            ))}
+    
+                        </DndContext>
+                    </div>
+                    <ScrollBar orientation="horizontal" />
+                </ScrollArea>
+    
+                
+            </>
+        )
+    }
+    //# ->  Mobile
+    else{
+        return (
             <>
             <h2 className="text-5xl font-black my-10">Tareas</h2>
             
-            <ScrollArea className=' w-full whitespace-nowrap rounded-md border'>
-                <ScrollBar orientation="horizontal" />
+            <Card className='flex flex-col gap-3 pb-32 max-w-[980px] w-full px-0 mx-auto border-2 bg-background'>
+                <DndContext onDragEnd={handleDragEnd}>
+                    {Object.entries(groupedTasks).map(([status, tasks]) => (
+                        <div key={status} className=' w-full pb-10'>
+                            <h3 className={` text-center text-white text-base font-normal border border-borde bg-input px-3 py-1 border-t-8 ${statusStyles[status]}`}>{statusTranslations[status]}</h3>
+                            <DropTask status={status}/>
+                            
+                            <ul className='mt-5 space-y-5 p-5'>
+                                {tasks.length === 0 ? (
+                                    <li className=" text-muted-foreground text-center font-semibold pt-3">No Hay tareas</li>
+                                ) : (
+                                    tasks.map(task => <TaskCard key={task._id} task={task} canEdit={canEdit}/>)
+                                )}
+                            </ul>
+                        </div>
+                    ))}
 
-                <div className='flex gap-3 pb-32 max-w-[980px] w-full px-0 mx-auto'>
-                    <DndContext onDragEnd={handleDragEnd}>
-                        {Object.entries(groupedTasks).map(([status, tasks]) => (
-                            <div key={status} className=' w-1/5'>
-                                <h3 className={` text-center text-white text-base font-normal border border-borde bg-input px-3 py-1 border-t-8 ${statusStyles[status]}`}>{statusTranslations[status]}</h3>
-                                <DropTask status={status}/>
-                                
-                                <ul className='mt-5 space-y-5'>
-                                    {tasks.length === 0 ? (
-                                        <li className=" text-muted-foreground text-center font-semibold pt-3">No Hay tareas</li>
-                                    ) : (
-                                        tasks.map(task => <TaskCard key={task._id} task={task} canEdit={canEdit}/>)
-                                    )}
-                                </ul>
-                            </div>
-                        ))}
-
-                    </DndContext>
-                </div>
-                <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+                </DndContext>
+            </Card>
 
             
         </>
     )
+    }
 }
 

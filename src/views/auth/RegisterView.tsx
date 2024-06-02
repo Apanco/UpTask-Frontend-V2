@@ -48,7 +48,7 @@ export default function RegisterView() {
   return (
     <>
       <Card>
-        <CardHeader className=" pb-5">
+        <CardHeader className=" pb-5 border-0">
           <CardTitle className=" text-center mb-2 font-bold">Crear cuenta</CardTitle>
           <CardDescription>LLene el formulario para{" "+" "} <span className=" text-secundario">Crear su cuenta</span></CardDescription>
         </CardHeader>

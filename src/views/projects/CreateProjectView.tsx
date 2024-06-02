@@ -10,11 +10,12 @@ import type { ProjectFormData } from "@/types/index"
 import { createProject } from "@/api/ProjectApi"
 
 //# ->  Componentes
-import { C_Boton } from "@/components/C_Boton"
 import ProjectForm from "@/components/projects/ProjectForm"
 import { Card } from "@/components/ui/card";
 import C_Encabezado from "@/components/C_Encabezado";
 import C_BotonVolverProyectos from "@/components/C_BotonVolverProyectos";
+import { Button } from "@/components/ui/button";
+import { Loader2, SaveAllIcon } from "lucide-react";
 export default function CreateProjectView() {
     
     const [isLoad, setisLoad] = useState<boolean>(false)
@@ -58,7 +59,7 @@ export default function CreateProjectView() {
             
             <div className=" max-w-3xl mx-auto mt-5">
 
-                <Card className=" px-5 py-10 rounded-sm border border-secundario bg-transparente">
+                <Card className=" px-5 py-10 rounded-sm border bg-transparente">
                 <form 
                     // className=" mt-10 bg-fondo shadow-lg p-10 rounded-lg"
                     onSubmit={handleSubmit(handleForm)}
@@ -70,11 +71,25 @@ export default function CreateProjectView() {
                         register={register}
                         errors={errors}
                     />
-                    <C_Boton
-                        isLoad={isLoad}
-                        text="Crear proyecto"
-                        textLoading="Creando proyecto"
-                    />
+                    <Button
+                        variant={"secondary"}
+                        className=" w-full"
+                        disabled={isLoad}
+                    >
+                        <div className=" w-full flex justify-center items-center gap-x-3">
+                            {isLoad ? (
+                                <>
+                                    <Loader2 className=" w-6 h-6 animate-spin"/>
+                                    <p>Creando</p>
+                                </>
+                            ) : (
+                                <>
+                                    <SaveAllIcon className=" w-6 h-6"/>
+                                    <p>Crear proyecto</p>
+                                </>
+                            )}
+                        </div>
+                    </Button>
                 </form>
                 </Card>
             </div>

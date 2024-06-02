@@ -17,7 +17,7 @@ export default function AuthLayout() {
                     <div className="w-full flex items-center h-full justify-center">
                         <img className=" max-h-32" src="/UpTask.svg" alt="Logo UpTask" />
                     </div>
-                    <Tabs defaultValue={defaultURL} className="w-[400px] md:w-8/12 lg:w-8/12">
+                    <Tabs defaultValue={defaultURL} className="w-full md:w-8/12 lg:w-10/12">
                         <TabsList className=" grid w-full grid-cols-2">
                             <TabsTrigger onClick={()=>navigate("/auth/login")} value="login">Iniciar Sesion</TabsTrigger>
                             <TabsTrigger onClick={()=>navigate("/auth/register")} value="register">Registrarse</TabsTrigger>
@@ -26,13 +26,6 @@ export default function AuthLayout() {
                         {/* //# -> Login */}
                         <TabsContent value="login">
                              <Outlet/>
-
-                             {/* <nav className="w-full flex justify-center py-2">
-                                <button 
-                                
-                                onClick={()=>navigate("/auth/register")}
-                                >¿No tienes cuenta? <span className=" text-secundario">Crea una</span> </button>
-                            </nav> */}
                         </TabsContent>
                         <TabsContent value="register"> <Outlet/> </TabsContent>
                         {defaultURL === "login" &&(

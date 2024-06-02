@@ -35,6 +35,9 @@ export default function DropTask({status} : DropTaskProps) {
     }else{
         return (
             <>
+                <div ref={setNodeRef} className={` text-xs text-center text-muted-foreground font-semibold p-2 border border-dashed  mt-5 ${styles}`}>
+                    Soltar tarea aqui
+                </div>
             </>
         )
     }

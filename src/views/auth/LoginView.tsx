@@ -46,7 +46,7 @@ export default function LoginView() {
   }
   return (
     <>
-      <Card>
+      <Card className=" border-0">
         <CardHeader>
           <CardTitle className=" mb-3 text-center font-bold">Iniciar sesion</CardTitle>
           <CardDescription>Comienza a planear tus proyectos{" "+" "} <span className=" text-secundario">iniciando sesion</span></CardDescription>

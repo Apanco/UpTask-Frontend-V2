@@ -1,7 +1,6 @@
 
 import ProjectForm from "@/components/projects/ProjectForm";
 import { Card } from "@/components/ui/card";
-import { C_Boton } from "@/components/C_Boton";
 import { Project, ProjectFormData } from "@/types";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -9,6 +8,8 @@ import { updateProject } from "@/api/ProjectApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import { Loader2, SaveAllIcon } from "lucide-react";
 
 type UpdateProjectFormProps = {
     data: Project
@@ -53,7 +54,7 @@ export default function UpdateProjectForm({data}:UpdateProjectFormProps) {
     }
     return (
         <>
-            <Card className=" px-5 py-10 rounded-sm border border-secundario_hover bg-transparente">
+            <Card className=" px-5 py-10 rounded-sm border   bg-transparente">
                 <form 
                     // className=" mt-10 bg-fondo shadow-lg p-10 rounded-lg"
                     onSubmit={handleSubmit(handleForm)}
@@ -65,11 +66,25 @@ export default function UpdateProjectForm({data}:UpdateProjectFormProps) {
                         register={register}
                         errors={errors}
                     />
-                    <C_Boton
-                        isLoad={isLoading}
-                        text="Actualizar proyecto"
-                        textLoading="Actualizando proyecto"
-                    />
+                    <Button
+                        variant={"secondary"}
+                        className=" w-full"
+                        disabled={isLoading}
+                    >
+                        <div className=" w-full flex justify-center items-center gap-x-3">
+                            {isLoading ? (
+                                <>
+                                    <Loader2 className=" w-6 h-6 animate-spin"/>
+                                    <p>Guardando cambios</p>
+                                </>
+                            ) : (
+                                <>
+                                    <SaveAllIcon className=" w-6 h-6"/>
+                                    <p>Guardar proyecto</p>
+                                </>
+                            )}
+                        </div>
+                    </Button>
                 </form>
             </Card>
         </>

@@ -32,7 +32,7 @@ export default function DashboardView() {
                     className=" py-2 gap-x-3 w-full border-2 border-secundario flex items-center hover:text-secundario">
                     <Plus/>
                     <p className=" h-full">
-                        Nuevo proyetos
+                        Crear proyecto
                     </p>
                 </Button>
             </C_Encabezado>

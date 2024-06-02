@@ -90,9 +90,9 @@ export default function C_Sheet({ user }: C_SheetProps) {
                   </Avatar>
                 </div>
 
-                <div className=" w-2/3 h-full py-2 flex flex-col justify-center text-center md:text-start">
-                  <p className=" text-xl font-bold"> Hola <span>{user.name}</span> </p>
-                  <p className=" text-sm"> {user.email} </p>
+                <div className=" w-full h-full py-2 flex flex-col justify-center text-center md:text-start">
+                  <p className=" text-center text-xl font-bold"> Hola <span>{user.name}</span> </p>
+                  <p className=" text-center text-sm"> {user.email} </p>
                 </div>
               </div>
 
