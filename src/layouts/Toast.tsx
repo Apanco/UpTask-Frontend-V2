@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import { Toaster } from "@/components/ui/sonner"
 
 export default function Toast() {
   return (
@@ -10,6 +11,8 @@ export default function Toast() {
             pauseOnFocusLoss={false}
             theme="dark"
         />
+        <Toaster />
+        
     </>
 )
 }

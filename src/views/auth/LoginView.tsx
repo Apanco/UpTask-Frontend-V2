@@ -10,6 +10,10 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { authenticateUser } from "@/api/AuthAPI";
 import { toast } from "react-toastify";
 import { useState } from "react";
+import {DropdownMenu,DropdownMenuContent,DropdownMenuLabel,DropdownMenuSeparator,DropdownMenuTrigger,} from "@/components/ui/dropdown-menu"
+import { CopyIcon, InfoIcon } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { toast as sonner } from "sonner"
 
 export default function LoginView() {
   //. ->  State del boton
@@ -44,12 +48,63 @@ export default function LoginView() {
     await mutateAsync(formData)
     setLoad(false);
   }
-  return (
+
+  //. ->  Copiar
+  const [email] = useState('aperezapanco@gmail.com');
+  const [password] = useState("12345678")
+  const handleEmail = () => {
+    navigator.clipboard.writeText(email);
+    notification("Email copiado en el portapapeles")
+  }
+  const handlePassword = () => {
+    navigator.clipboard.writeText(password);
+    notification("Contraseña copiada en el portapapeles")
+  }
+
+  const notification = ( text : string )=>{
+    sonner(`${text}`, {
+      action: {
+        label: ("Cerrar"),
+        onClick: () => {},
+      },
+    })
+  }
+
+  return (  
     <>
-      <Card className=" border-0">
+      <Card className=" bg-background border-2">
         <CardHeader>
           <CardTitle className=" mb-3 text-center font-bold">Iniciar sesion</CardTitle>
-          <CardDescription>Comienza a planear tus proyectos{" "+" "} <span className=" text-secundario">iniciando sesion</span></CardDescription>
+          <CardDescription className=" flex w-full justify-between">
+            <span>
+              Comienza a planear tus proyectos{" "+" "} <span className=" text-secundario">iniciando sesion</span>
+            </span>
+            <DropdownMenu>
+              <DropdownMenuTrigger><InfoIcon className=" w-6 h-6"/></DropdownMenuTrigger>
+              <DropdownMenuContent className=" w-72 p-2">
+                <DropdownMenuLabel>Datos de prueba</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <div className=" w-full space-y-2">
+                  <h3>Email</h3>
+                  <div className=" w-full flex justify-start">
+                    <Button disabled variant={"secondary"} className=" text-start justify-start min-w-52 rounded-r-none">{email}</Button>
+                    <Button variant={"secondary"} className=" rounded-l-none border-2 border-primary" onClick={handleEmail} >
+                      <CopyIcon className=" w-4 h-4"/> 
+                    </Button>
+                  </div>
+                </div>
+                <div className=" w-full space-y-2">
+                  <h3>Contraseña</h3>
+                  <div className=" w-full flex justify-start">
+                    <Button disabled variant={"secondary"} className=" text-start justify-start min-w-52 rounded-r-none">{password}</Button>
+                    <Button variant={"secondary"} className=" rounded-l-none border-2 border-primary" onClick={handlePassword} >
+                      <CopyIcon className=" w-4 h-4"/> 
+                    </Button>
+                  </div>
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </CardDescription>
         </CardHeader>
 
         <CardContent className=" space-y-2">

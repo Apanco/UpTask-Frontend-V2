@@ -14,7 +14,7 @@ export default function AuthLayout() {
         <>
              <div className=" h-screen w-full lg:grid lg:min-h-[600px] lg:grid-cols-2">
                 <div className=" flex flex-col items-center justify-start space-y-3 mx-5 pt-3">
-                    <div className="w-full flex items-center h-full justify-center">
+                    <div className="w-full flex items-center h-32 justify-center">
                         <img className=" max-h-32" src="/UpTask.svg" alt="Logo UpTask" />
                     </div>
                     <Tabs defaultValue={defaultURL} className="w-full md:w-8/12 lg:w-10/12">

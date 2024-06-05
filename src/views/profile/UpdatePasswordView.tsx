@@ -2,12 +2,15 @@ import { updatePassword } from "@/api/ProfileApi";
 import ErrorMessageXs from "@/components/ErrorMessageXs";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useAuth } from "@/hooks/useAuth";
 import { UpdatePassword } from "@/types";
 import { useMutation } from "@tanstack/react-query";
 import { Loader2, LockKeyhole } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import { ProfileForm as ProfileFormType} from "@/types"
+import { toast as sonner } from "sonner"
 
 export default function UpdatePasswordView() {
   //. -> button state
@@ -18,7 +21,12 @@ export default function UpdatePasswordView() {
     password:"",
     password_confirmation:""
   }
-
+  // .->  email
+  const { data } = useAuth()
+  const user : ProfileFormType = {
+    name:data?.name ??"",
+    email:data?.email??""
+}
   //. ->  react-hook-form
   const { register, formState:{errors}, handleSubmit, watch, reset } = useForm<UpdatePassword>({defaultValues:initialValues})
   const password = watch("password")
@@ -38,6 +46,17 @@ export default function UpdatePasswordView() {
   //. ->  handleForm
   const handleForm = async (passwordForm : UpdatePassword)=>{
     setLoad(true)
+    if(user.email === "aperezapanco@gmail.com"){
+      sonner(`Accion no valida`, {
+        description:"Lo sentimos, no puedes editar los datos de la cuenta de prueba",
+        action: {
+          label: ("Cerrar"),
+          onClick: () => {},
+        },
+      })
+      setLoad(false)
+      return
+    }
     await mutateAsync({passwordForm})
     reset()
     setLoad(false)

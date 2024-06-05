@@ -47,7 +47,7 @@ export default function RegisterView() {
 
   return (
     <>
-      <Card>
+      <Card className=" bg-background border-2  ">
         <CardHeader className=" pb-5 border-0">
           <CardTitle className=" text-center mb-2 font-bold">Crear cuenta</CardTitle>
           <CardDescription>LLene el formulario para{" "+" "} <span className=" text-secundario">Crear su cuenta</span></CardDescription>
@@ -58,7 +58,7 @@ export default function RegisterView() {
             noValidate
             className=""
           >
-            <div className=" mb-1 md:mb-3 space-y-2">
+            <div className=" mb-1 md:mb-3 space-y-1">
                 <Label className=" font-normal">Email</Label>
                 <Input
                   id="email"
@@ -77,7 +77,7 @@ export default function RegisterView() {
                   )}
                 </div>
             </div>
-            <div className=" mb-3 md:mb-3 space-y-2">
+            <div className=" space-y-1">
                 <Label className=" font-normal">Nombre</Label>
                 <Input
                   id="name"
@@ -94,7 +94,7 @@ export default function RegisterView() {
                 </div>
             </div>
             <div className=" w-full flex justify-between gap-x-5">
-                <div className=" mb-3 md:mb-3 space-y-2 w-full">
+                <div className=" space-y-1 w-full">
                     <Label className=" font-normal">Contraseña</Label>
                     <Input
                       id="password"
@@ -108,7 +108,7 @@ export default function RegisterView() {
                       )}
                     </div>
                 </div>
-                <div className=" mb-3 md:mb-3 space-y-2 w-full">
+                <div className=" space-y-1 w-full">
                     <Label className=" font-normal">Repetir contraseña</Label>
                     <Input
                       id="password_confirmation"

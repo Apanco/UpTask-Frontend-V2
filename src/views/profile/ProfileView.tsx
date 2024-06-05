@@ -3,6 +3,8 @@
 import {Accordion,AccordionContent,AccordionItem,} from "@/components/ui/accordion"
 import { Button } from "@/components/ui/button"
 import { PencilIcon } from "lucide-react"
+import { toast as sonner } from "sonner"
+
 //# ->  Hooks
 import { useAuth } from "@/hooks/useAuth"
 import { useEffect, useState } from "react"
@@ -40,13 +42,25 @@ export default function ProfileView() {
         queryKey:["countProject"],
         queryFn:getProjectsUser
     })
-    
+    const handleEdit = ()=>{
+        if(user.email === "aperezapanco@gmail.com"){
+            sonner(`Accion no valida`, {
+                description:"Lo sentimos, no puedes editar los datos de la cuenta de prueba",
+                action: {
+                  label: ("Cerrar"),
+                  onClick: () => {},
+                },
+            })
+        } else{
+            setActive(!active)
+        }
+    }
     return (
         <div className=" w-full flex flex-col items-center justify-center gap-y-2">
             <div className=" pt-5 l flex flex-col justify-center items-center relative">
                 <h2 className=" text-3xl font-bold">{data?.name}</h2>
                 <Button
-                    onClick={()=>setActive(!active)}
+                    onClick={handleEdit}
                     variant={"ghost"}
                     className={`absolute w-8 p-0 px-0 -right-10 ${styles}`}
                 >
